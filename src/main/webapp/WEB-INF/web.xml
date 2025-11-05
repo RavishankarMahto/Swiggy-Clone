@@ -1,0 +1,203 @@
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+         https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+	version="5.0">
+
+	<display-name>SwiggyClone</display-name>
+	<description>Food Delivery Application with Restaurant Management</description>
+
+
+
+	<welcome-file-list>
+		<welcome-file>welcome.jsp</welcome-file>
+		<welcome-file>home.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>register.jsp</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
+		<welcome-file>restaurant.jsp</welcome-file>
+		<welcome-file>menu.jsp</welcome-file>
+		<welcome-file>profile.jsp</welcome-file>
+		<welcome-file>cart.jsp</welcome-file>
+	</welcome-file-list>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+		<cookie-config>
+			<http-only>true</http-only>
+		</cookie-config>
+	</session-config>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error.jsp</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error.jsp</location>
+	</error-page>
+
+	<!-- Security Constraints -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Protected Resources</web-resource-name>
+			<url-pattern>/admin/*</url-pattern>
+			<url-pattern>/restaurant-owner/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+			<role-name>restaurant_owner</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<!-- Servlet Mappings -->
+
+	<servlet>
+		<servlet-name>WelcomeServlet</servlet-name>
+		<servlet-class>com.fooddelivery.servlet.controller.WelcomeServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>WelcomeServlet</servlet-name>
+		<url-pattern>/welcome</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RegisterServlet</servlet-name>
+		<servlet-class>com.fooddelivery.servlet.RegisterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegisterServlet</servlet-name>
+		<url-pattern>/register</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.fooddelivery.servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>HomeServlet</servlet-name>
+		<servlet-class>com.fooddelivery.servlet.HomeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HomeServlet</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+
+
+
+	<servlet>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>com.fooddelivery.servlet.LogoutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>RestaurantServlet</servlet-name>
+		<servlet-class>com.fooddelivery.servlet.RestaurantServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RestaurantServlet</servlet-name>
+		<url-pattern>/restaurant</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MenuServlet</servlet-name>
+		<servlet-class>com.fooddelivery.servlet.MenuServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MenuServlet</servlet-name>
+		<url-pattern>/menu</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>OrderServlet</servlet-name>
+		<servlet-class>com.fooddelivery.servlet.OrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderServlet</servlet-name>
+		<url-pattern>/order</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CartServlet</servlet-name>
+		<servlet-class>com.fooddelivery.servlet.CartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CartServlet</servlet-name>
+		<url-pattern>/cart</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ProfileServlet</servlet-name>
+		<servlet-class>com.fooddelivery.servlet.ProfileServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProfileServlet</servlet-name>
+		<url-pattern>/profile</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AdminServlet</servlet-name>
+		<servlet-class>com.fooddelivery.servlet.AdminServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminServlet</servlet-name>
+		<url-pattern>/admin/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>RestaurantOwnerServlet</servlet-name>
+		<servlet-class>com.fooddelivery.servlet.RestaurantOwnerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RestaurantOwnerServlet</servlet-name>
+		<url-pattern>/restaurant-owner/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SearchServlet</servlet-name>
+		<servlet-class>com.fooddelivery.servlet.SearchServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchServlet</servlet-name>
+		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+
+	<!-- Filters -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>com.fooddelivery.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- DB Params -->
+	<context-param>
+		<param-name>database.url</param-name>
+		<param-value>jdbc:mysql://localhost:3306/food_delivery</param-value>
+	</context-param>
+	<context-param>
+		<param-name>database.username</param-name>
+		<param-value>root</param-value>
+	</context-param>
+	<context-param>
+		<param-name>database.password</param-name>
+		<param-value>Admin@123</param-value>
+	</context-param>
+</web-app>
